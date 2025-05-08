@@ -82,13 +82,6 @@ npx prisma migrate dev --name init
 npm run start:dev
 ```
 
-📝 **Backend `.env` Example:**
-```
-DATABASE_URL="postgresql://user:password@localhost:5432/jobdb"
-```
-
----
-
 ### 3. 💻 Setup the Frontend
 
 ```bash
@@ -135,27 +128,12 @@ npm run dev
 
 ```bash
 npm run dev       # Start dev server
-npm run build     # Build for production
 ```
 
 ### Backend
 
 ```bash
-npm run start:dev # Start dev server
-npx prisma studio # Visual database browser
+npm run start # Start dev server
 ```
 
----
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a Pull Request
-
----
-
-## 🛡 License
-
-This project is open source and available under the [MIT License](LICENSE).
