@@ -27,7 +27,7 @@ A full-stack job management admin interface where users can create, view, and ma
 | Frontend         | Backend          | Database        |
 |------------------|------------------|-----------------|
 | Next.js          | NestJS           | PostgreSQL      |
-| Mantine UI       | TypeScript       | Prisma ORM      |
+| Mantine UI       | JavaScript       | TypeORM      |
 | React Hook Form  | REST API         | pg (PostgreSQL driver) |
 
 ---
@@ -39,7 +39,7 @@ job-dashboard/
 │
 ├── frontend/        # Next.js + Mantine UI + React Hook Form
 │
-├── backend/         # NestJS + Prisma + PostgreSQL
+├── backend/         # NestJS + TypeORM + PostgreSQL
 │
 └── README.md        # This file
 ```
