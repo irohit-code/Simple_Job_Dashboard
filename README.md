@@ -59,7 +59,7 @@ job-dashboard/
 ### 1. 📦 Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/job-dashboard.git
+git clone https://github.com/irohit-code/job-dashboard.git
 cd job-dashboard
 ```
 
