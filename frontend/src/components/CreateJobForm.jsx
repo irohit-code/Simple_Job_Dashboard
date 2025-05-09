@@ -34,7 +34,8 @@ export default function CreateJobForm({ onSuccess }) {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('http://localhost:3000/jobs', data);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/jobs`, data);
+
       reset();
       modals.closeAll();
       if (onSuccess) onSuccess();
