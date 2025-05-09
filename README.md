@@ -27,7 +27,7 @@ A full-stack job management admin interface where users can create, view, and ma
 | Frontend         | Backend          | Database        |
 |------------------|------------------|-----------------|
 | Next.js          | NestJS           | PostgreSQL      |
-| Mantine UI       | TypeScript       | Prisma ORM      |
+| Mantine UI       | JavaScript       | TypeORM      |
 | React Hook Form  | REST API         | pg (PostgreSQL driver) |
 
 ---
@@ -39,7 +39,7 @@ job-dashboard/
 │
 ├── frontend/        # Next.js + Mantine UI + React Hook Form
 │
-├── backend/         # NestJS + Prisma + PostgreSQL
+├── backend/         # NestJS + TypeORM + PostgreSQL
 │
 └── README.md        # This file
 ```
@@ -59,7 +59,7 @@ job-dashboard/
 ### 1. 📦 Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/job-dashboard.git
+git clone https://github.com/irohit-code/job-dashboard.git
 cd job-dashboard
 ```
 
@@ -81,13 +81,6 @@ npx prisma migrate dev --name init
 # Start backend server
 npm run start:dev
 ```
-
-📝 **Backend `.env` Example:**
-```
-DATABASE_URL="postgresql://user:password@localhost:5432/jobdb"
-```
-
----
 
 ### 3. 💻 Setup the Frontend
 
@@ -135,27 +128,12 @@ npm run dev
 
 ```bash
 npm run dev       # Start dev server
-npm run build     # Build for production
 ```
 
 ### Backend
 
 ```bash
-npm run start:dev # Start dev server
-npx prisma studio # Visual database browser
+npm run start # Start dev server
 ```
 
----
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a Pull Request
-
----
-
-## 🛡 License
-
-This project is open source and available under the [MIT License](LICENSE).
