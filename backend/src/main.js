@@ -4,7 +4,7 @@ const express = require('express');
 const JobsService = require('./jobs/jobs.service');
 const JobsController = require('./jobs/jobs.controller');
 const JobsModule = require('./jobs/jobs.module').register();
-
+require('dotenv').config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
