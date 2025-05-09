@@ -1,6 +1,6 @@
 export async function fetchJobs() {
   try {
-    const response = await fetch('http://localhost:3000/jobs'); // ← Adjust this if backend port is different
+    const response = await fetch('https://simple-job-dashboard.onrender.com/jobs'); // ← Adjust this if backend port is different
     if (!response.ok) {
       throw new Error('Failed to fetch jobs');
     }
