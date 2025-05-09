@@ -23,19 +23,14 @@ class JobsService {
         company,
         location,
         job_type,
-        salaryRange,
         description,
         requirements,
         responsibilities,
         applicationDeadline,
       } = jobData;
 
-      // map to snake_case for DB
-
-      // Split salaryRange (e.g. "50000-70000") into min and max
-      const [salaryMin, salaryMax] = salaryRange
-        ? salaryRange.split('-').map(s => parseInt(s.trim(), 10))
-        : [null, null];
+      const salary_min = parseInt(jobData.salary_min, 10) || 0;
+      const salary_max = parseInt(jobData.salary_max, 10) || 0;
 
       const query = `
         INSERT INTO jobs (
@@ -59,8 +54,8 @@ class JobsService {
         company,
         location,
         job_type,
-        salaryMin,
-        salaryMax,
+        salary_min,
+        salary_max,
         description,
         requirements,
         responsibilities,
@@ -76,6 +71,7 @@ class JobsService {
       client.release();
     }
   }
+
 }
 
 module.exports = JobsService;

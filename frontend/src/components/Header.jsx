@@ -16,10 +16,28 @@ const navLinks = [
 export default function Header() {
     const openCreateJobModal = () => {
         modals.open({
-            title: 'Create Job',
-            children: <CreateJobForm />,
+            modalId: 'create-job-modal',
+            title: (
+                <Text ta="center" fw={600} fz="lg">
+                    Create Job Opening
+                </Text>
+            ),
+            centered: true,
+            size: 'xl',
+            styles: {
+                title: { width: '100%', textAlign: 'center' },
+                content: { width: '750px', padding: '24px', borderRadius: '16px' },
+            },
+            children: (
+                <div>
+                    <CreateJobForm />
+                </div>
+            ),
         });
+
     };
+
+
 
     return (
         <header
@@ -29,19 +47,19 @@ export default function Header() {
                 marginTop: '20px',
                 borderColor: 'transparent',
                 borderRadius: '70px',
-                boxShadow: '0 8px 16px rgba(159, 158, 158, 0.3)', // Increased shadow intensity
+                boxShadow: '0 8px 16px rgba(159, 158, 158, 0.3)',
                 padding: '10px 20px',
-                backgroundColor: '#fff', // Ensure the header has a background color for contrast
+                backgroundColor: '#fff',
             }}
         >
             <Container size="xl">
                 <Group justify="space-between" align="center">
-                    {/* Logo */}
+
                     <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                         <Image src="/file.svg" alt="Logo" height={32} />
                     </Link>
 
-                    {/* Navigation Links */}
+
                     <Group gap="lg" visibleFrom="sm">
                         {navLinks.map((link) => (
                             <Link
@@ -54,7 +72,7 @@ export default function Header() {
                         ))}
                     </Group>
 
-                    {/* Create Jobs Button */}
+
                     <Button
                         radius="xl"
                         size="md"

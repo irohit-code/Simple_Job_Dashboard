@@ -1,5 +1,6 @@
+// NO 'use client' here
 import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core';
+import Providers from '@/components/Providers';
 
 export const metadata = {
   title: 'Job Dashboard',
@@ -9,9 +10,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <MantineProvider defaultColorScheme="light">
+        <Providers>
           {children}
-        </MantineProvider>
+        </Providers>
       </body>
     </html>
   );

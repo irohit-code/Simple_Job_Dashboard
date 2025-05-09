@@ -6,78 +6,175 @@ import {
   Textarea,
   NumberInput,
   Select,
-  Stack,
   Group,
+  Box,
+  Grid,
+  Stack,
+  Divider,
+  Title,
+  ActionIcon,
 } from '@mantine/core';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import { useForm, Controller } from 'react-hook-form';
 import { modals } from '@mantine/modals';
+import axios from 'axios';
+import { IconArrowRight } from '@tabler/icons-react';
 
 export default function CreateJobForm({ onSuccess }) {
   const {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      applicationDeadline: '',
+    },
+  });
 
   const onSubmit = async (data) => {
     try {
       await axios.post('http://localhost:3000/jobs', data);
       reset();
-      modals.closeAll(); // Close modal on success
-      if (onSuccess) onSuccess(); // Refresh job list
+      modals.closeAll();
+      if (onSuccess) onSuccess();
     } catch (err) {
       console.error('Failed to create job:', err);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack>
-        <TextInput
-          label="Job Title"
-          placeholder="Enter job title"
-          {...register('title', { required: true })}
-          error={errors.title && 'Title is required'}
-        />
-        <TextInput
-          label="Company"
-          placeholder="Enter company name"
-          {...register('company', { required: true })}
-          error={errors.company && 'Company is required'}
-        />
-        <TextInput
-          label="Location"
-          placeholder="Enter location"
-          {...register('location', { required: true })}
-          error={errors.location && 'Location is required'}
-        />
-        <NumberInput
-          label="Minimum Salary"
-          placeholder="e.g. 30000"
-          {...register('salary_min', { required: true, valueAsNumber: true })}
-        />
-        <NumberInput
-          label="Maximum Salary"
-          placeholder="e.g. 80000"
-          {...register('salary_max', { required: true, valueAsNumber: true })}
-        />
-        <Select
-          label="Job Type"
-          placeholder="Select job type"
-          data={['Full-time', 'Part-time', 'Contract']}
-          {...register('job_type', { required: true })}
-        />
-        <Textarea
-          label="Description"
-          placeholder="Job description"
-          {...register('description', { required: true })}
-        />
-        <Group position="right" mt="md">
-          <Button type="submit" color="violet">Submit</Button>
+    <Box px="md" py="sm">
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid gutter="md">
+          <Grid.Col span={6}>
+            <TextInput
+              label="Job Title"
+              placeholder="ex. Full Stack Developer"
+              {...register('title', { required: true })}
+              error={errors.title && 'Title is required'}
+              radius="md"
+            />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <TextInput
+              label="Company Name"
+              placeholder="ex. Amazon, Microsoft, Swiggy"
+              {...register('company', { required: true })}
+              error={errors.company && 'Company is required'}
+              radius="md"
+            />
+          </Grid.Col>
+
+          <Grid.Col span={6}>
+            <TextInput
+              label="Location"
+              placeholder="Choose Preferred Location"
+              {...register('location', { required: true })}
+              error={errors.location && 'Location is required'}
+              radius="md"
+            />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Controller
+              name="job_type"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Select
+                  label="Job Type"
+                  placeholder="FullTime"
+                  data={['Full-time', 'Part-time', 'Internship']}
+                  {...field}
+                  radius="md"
+                  error={errors.job_type && 'Job type is required'}
+                />
+              )}
+            />
+          </Grid.Col>
+
+          <Grid.Col span={6}>
+            <Controller
+              name="salary_min"
+              control={control}
+              rules={{ required: 'Minimum salary is required' }}
+              render={({ field }) => (
+                <NumberInput
+                  label="Minimum Salary"
+                  placeholder="₹0"
+                  icon={<span>₹</span>}
+                  radius="md"
+                  error={errors.salary_min?.message}
+                  {...field}
+                />
+              )}
+            />
+          </Grid.Col>
+
+          <Grid.Col span={6}>
+            <Controller
+              name="salary_max"
+              control={control}
+              rules={{ required: 'Maximum salary is required' }}
+              render={({ field }) => (
+                <NumberInput
+                  label="Maximum Salary"
+                  placeholder="₹12,00,000"
+                  icon={<span>₹</span>}
+                  radius="md"
+                  error={errors.salary_max?.message}
+                  {...field}
+                />
+              )}
+            />
+          </Grid.Col>
+
+
+          <Grid.Col span={12}>
+            <Textarea
+              label="Job Description"
+              placeholder="Please share a description to let the candidate know more about the job role"
+              {...register('description', { required: true })}
+              error={errors.description && 'Description is required'}
+              autosize
+              minRows={4}
+              radius="md"
+            />
+          </Grid.Col>
+
+
+          <Grid.Col span={6}>
+            <Controller
+              name="applicationDeadline"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextInput
+                  type="date"
+                  label="Application Deadline"
+                  placeholder="Select deadline"
+                  {...field}
+                  error={errors.applicationDeadline && 'Deadline is required'}
+                  radius="md"
+                />
+              )}
+            />
+          </Grid.Col>
+
+        </Grid>
+
+
+
+        <Group justify="space-between" mt="xl">
+          <Button variant="default" radius="md">
+            Save Draft
+          </Button>
+          <Button type="submit" radius="md" rightSection={<IconArrowRight size={18} />}>
+            Publish
+          </Button>
         </Group>
-      </Stack>
-    </form>
+      </form>
+    </Box>
   );
 }

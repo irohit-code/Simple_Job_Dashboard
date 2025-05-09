@@ -48,7 +48,7 @@ export default function JobsPage() {
       <Container size="xl" py="xl">
 
 
-        {/* Search and Filters */}
+
         <Flex gap="md" wrap="wrap" align="center" mb="xl">
           <TextInput
             icon={<IconSearch size={16} />}
@@ -89,25 +89,34 @@ export default function JobsPage() {
         </Flex>
 
         {/* Job Cards */}
-        <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
+        <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }} spacing="sm">
           {jobs.map((job) => (
             <Card
               key={job.id}
               shadow="xl"
+
               padding="lg"
               radius="xl"
               withBorder
-              style={{ transition: '0.3s', minHeight: 250 }}
+              style={{ transition: '0.3s', minHeight: 250, minWidth: 300 }}
             >
               <Group justify="space-between" mb="xs">
-                <Badge color="gray" variant="light" radius="sm" size="xs">
-                  24H AGO
-                </Badge>
-                <Text fw={700} size="lg">{job.title}</Text>
+                <Text size="lg" fw={700} color="black" mb={6}>
+                  {job.company}
+                </Text>
               </Group>
-              <Text size="sm" color="dimmed" mb={6}>{job.company}</Text>
+
+              <Text fw={700} size="sm" mb={4}>
+                {job.title}
+              </Text>
               <Text size="sm" mb={4}>
-                👤 {job.experience || '1-3 yr Exp'} • 📍 {job.location} • 💼 {job.job_type}
+                👤 {job.experience || '1-3 year Experience'} {/* Experience */}
+              </Text>
+              <Text size="sm" mb={4}>
+                📍 {job.location} {/* Location */}
+              </Text>
+              <Text size="sm" mb={4}>
+                💼 {job.job_type} {/* Job type */}
               </Text>
               <Text size="sm" mb={4}>💰 ₹{job.salary_min} - ₹{job.salary_max}</Text>
               <Text size="sm" lineClamp={2} mb="sm">{job.description}</Text>
